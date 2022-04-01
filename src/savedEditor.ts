@@ -39,8 +39,8 @@ async function openEditor(fsPath: string, options: TextDocumentShowOptions): Pro
         const document = await workspace.openTextDocument(fsPath);
         return window.showTextDocument(document, options);
     }
-    catch (ex) {
-        Logger.error(ex, 'openEditor');
+    catch (err) {
+        Logger.error(err as Error, 'openEditor');
         return undefined;
     }
 }

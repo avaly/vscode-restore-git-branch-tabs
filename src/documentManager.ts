@@ -54,8 +54,8 @@ export class DocumentManager extends Disposable {
                 await editor.open();
             }
         }
-        catch (ex) {
-            Logger.error(ex, 'DocumentManager.open');
+        catch (err) {
+            Logger.error(err as Error, 'DocumentManager.open');
         }
     }
 
@@ -105,8 +105,8 @@ export class DocumentManager extends Disposable {
                 this.context.workspaceState.update(WorkspaceState.KnownBranches, knownBranches);
             }
         }
-        catch (ex) {
-            Logger.error(ex, 'DocumentManager.save');
+        catch (err) {
+            Logger.error(err as Error, 'DocumentManager.save');
         }
     }
 }

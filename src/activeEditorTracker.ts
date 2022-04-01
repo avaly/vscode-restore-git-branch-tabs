@@ -43,13 +43,22 @@ export class ActiveEditorTracker extends Disposable {
                 if (timer) {
                     clearTimeout(timer as any);
                     timer = 0;
-                    resolve(editor);
+                    if (editor) {
+                        resolve(editor);
+                    } else {
+                        reject(new Error('Editor is not available.'));
+                    }
                 }
             };
 
             timer = setTimeout(() => {
-                resolve(window.activeTextEditor);
-                timer = 0;
+                if (window.activeTextEditor) {
+                    resolve(window.activeTextEditor);
+                    timer = 0;
+                } else {
+                    reject(new Error('Editor is not available.'));
+
+                }
             }, timeout) as any;
         });
         this._resolver = undefined;
