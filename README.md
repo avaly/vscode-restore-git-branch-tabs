@@ -1,4 +1,6 @@
-# Restore Git Branch Tabs
+# Restore Git Branch Tabs Improved
+
+> ⚠️ This is a fork of the original extension [Restore Git Branch Tabs](https://marketplace.visualstudio.com/items?itemName=gkotas.restore-git-branch-tabs), which had stalled in development.
 
 Restore opened tabs on a per git branch basis.
 
@@ -34,7 +36,3 @@ This extension was heavily based off of the work done by [Eric Amodio](https://g
 
 - View Columns are not used correctly meaning order of tabs isn't preserved.
 - Extension doesn't activate if workspace is a subdirectory of a git repo (i.e. no .git in root of workspace)
-
-## Future Features
-
-- Command to open saved tabs for any branch

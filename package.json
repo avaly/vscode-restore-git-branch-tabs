@@ -1,17 +1,22 @@
 {
-    "name": "restore-git-branch-tabs",
-    "displayName": "Restore Git Branch Tabs",
+    "name": "restore-git-branch-tabs-improved",
+    "displayName": "Restore Git Branch Tabs Improved",
     "description": "Remembers and restores which tabs were opened for each git branch.",
-    "version": "0.4.1",
-    "publisher": "gkotas",
+    "version": "1.0.0",
+    "publisher": "avaly",
     "author": {
         "name": "Gerald Kotas",
         "email": "kotas3952@gmail.com"
     },
+    "contributors": [
+        {
+            "name": "Valentin Agachi"
+        }
+    ],
     "engines": {
         "vscode": "^1.38.0"
     },
-    "license": "SEE LICENSE IN LICENSE",
+    "license": "MIT",
     "categories": [
         "Other"
     ],
@@ -24,13 +29,13 @@
         "tabs"
     ],
     "icon": "images/icon.png",
-    "homepage": "https://github.com/gkotas/vscode-restore-git-branch-tabs/blob/master/README.md",
+    "homepage": "https://github.com/avaly/vscode-restore-git-branch-tabs/blob/master/README.md",
     "bugs": {
-        "url": "https://github.com/gkotas/vscode-restore-git-branch-tabs/issues"
+        "url": "https://github.com/avaly/vscode-restore-git-branch-tabs/issues"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/gkotas/vscode-restore-git-branch-tabs.git"
+        "url": "https://github.com/avaly/vscode-restore-git-branch-tabs.git"
     },
     "activationEvents": [
         "onStartupFinished"
@@ -92,6 +97,7 @@
         "vscode:prepublish": "npm run compile",
         "compile": "tsc -p ./",
         "watch": "tsc -watch -p ./",
+        "package": "vsce package",
         "pretest": "npm run compile",
         "test": "node ./out/test/runTest.js"
     },
@@ -104,6 +110,7 @@
         "mocha": "^6.1.4",
         "typescript": "^4.6.3",
         "tslint": "^5.12.1",
+        "vsce": "2.7.0",
         "vscode-test": "^1.0.2"
     }
 }
