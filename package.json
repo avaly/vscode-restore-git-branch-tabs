@@ -33,7 +33,7 @@
         "url": "https://github.com/gkotas/vscode-restore-git-branch-tabs.git"
     },
     "activationEvents": [
-        "*"
+        "onStartupFinished"
     ],
     "main": "./out/extension.js",
     "contributes": {
