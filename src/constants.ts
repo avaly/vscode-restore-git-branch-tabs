@@ -1,7 +1,7 @@
 'use strict';
 
 export const ExtensionKey = 'restoreGitBranchTabs';
-export const ExtensionOutputChannelName = 'RestoreGitBranchTabs';
+export const ExtensionOutputChannelName = 'Restore Git Branch Tabs';
 
 export type BuiltInCommands = 'workbench.action.closeActiveEditor' | 'workbench.action.nextEditor' | 'workbench.action.closeAllEditors';
 export const BuiltInCommands = {

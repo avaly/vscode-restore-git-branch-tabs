@@ -40,14 +40,10 @@ export class ActiveEditorTracker extends Disposable {
             let timer: any;
 
             this._resolver = (editor?: TextEditor | PromiseLike<TextEditor>) => {
-                if (timer) {
+                if (timer && editor) {
                     clearTimeout(timer as any);
                     timer = 0;
-                    if (editor) {
-                        resolve(editor);
-                    } else {
-                        reject(new Error('Editor is not available.'));
-                    }
+                    resolve(editor);
                 }
             };
 
@@ -56,8 +52,7 @@ export class ActiveEditorTracker extends Disposable {
                     resolve(window.activeTextEditor);
                     timer = 0;
                 } else {
-                    reject(new Error('Editor is not available.'));
-
+                    reject(new Error('Active text editor is not available'));
                 }
             }, timeout) as any;
         });

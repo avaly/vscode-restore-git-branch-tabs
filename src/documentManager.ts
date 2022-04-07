@@ -77,7 +77,10 @@ export class DocumentManager extends Disposable {
                 }
 
                 editor = await editorTracker.awaitNext(500);
-                if (editor !== undefined && openEditors.some(_ => TextEditorComparer.equals(_, editor, { useId: true, usePosition: true }))) break;
+
+                if (openEditors.some(openEditor => TextEditorComparer.equals(openEditor, editor, { useId: true, usePosition: true }))) {
+                    break;
+                }
             } while (!TextEditorComparer.equals(active, editor, { useId: true, usePosition: true }));
 
             editorTracker.dispose();
