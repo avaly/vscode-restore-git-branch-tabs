@@ -26,11 +26,12 @@ This extension was heavily based off of the work done by [Eric Amodio](https://g
 
 | Name | Description
 | ---- | -----------
-|`restoreGitBranchTabs.newBranchPreserveTabs` | Preserve the current tabs when switching to a new branch
-|`restoreGitBranchTabs.gitFolderLocation` | Path to directory of .git folder
-|`restoreGitBranchTabs.delayUpdate` | Preserve the current tabs when switching to a new branch
 |`restoreGitBranchTabs.debug` | Enable debug mode
+|`restoreGitBranchTabs.delayUpdate` | Preserve the current tabs when switching to a new branch
+|`restoreGitBranchTabs.gitFolderLocation` | Path to directory of .git folder
+|`restoreGitBranchTabs.newBranchPreserveTabs` | Preserve the current tabs when switching to a new branch
 |`restoreGitBranchTabs.outputLevel` | Specifies the verbosity of the output channel
+|`restoreGitBranchTabs.skipCommitsWithoutBranch` | Skip restore action on commits which are not the head of a branch. Useful when rebasing.
 
 ## Known Issues
 

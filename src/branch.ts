@@ -10,7 +10,6 @@ export function getGitBranch(headPath: string, callback: (branch: string | undef
             const branch = (line.split(' ').pop() || 'unknown').replace('refs/heads/', '');
             Logger.log(`getGitBranch: Got branch <${branch}>`);
             callback(branch);
-
         } else {
             Logger.error(err, 'Extension:getGitBranch');
         }

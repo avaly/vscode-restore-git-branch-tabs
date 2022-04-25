@@ -7,6 +7,7 @@ export interface IConfig {
     delayUpdate: number;
     debug: boolean;
     outputLevel: OutputLevel;
+    skipCommitsWithoutBranch: boolean;
 }
 
 export const defaultIConfig: IConfig = {
@@ -14,5 +15,6 @@ export const defaultIConfig: IConfig = {
     gitFolderLocation: '',
     delayUpdate: 0,
     debug: false,
-    outputLevel: 'silent'
+    outputLevel: 'silent',
+    skipCommitsWithoutBranch: false
 }

@@ -56,11 +56,11 @@ export function activate(context: ExtensionContext) {
         watch(gitPath, (event, filename) => {
             if (filename === 'HEAD') {
                 Logger.log(`${filename} file Changed`, event);
-                updateTabs(documentManager, headPath, cfg ? cfg.delayUpdate : 0);
+                updateTabs(documentManager, headPath, cfg ? cfg.delayUpdate : 0, cfg?.skipCommitsWithoutBranch || false);
             }
         });
 
-        updateTabs(documentManager, headPath, 0);
+        updateTabs(documentManager, headPath, 0, false);
 
         new ClearCommand(documentManager);
         new LoadCommand(documentManager, headPath);
@@ -69,15 +69,29 @@ export function activate(context: ExtensionContext) {
 
 }
 
+const SHA_REGEXP = /^[a-f0-9]{40}$/;
+
 let lastBranch = "";
 let lastHeadPath = "";
 let delayTimer: NodeJS.Timeout | null = null;
 
-async function updateTabs(documentManager: DocumentManager, headPath: string, delay: number) {
+async function updateTabs(documentManager: DocumentManager, headPath: string, delay: number, skipCommitsWithoutBranch: boolean) {
     getGitBranch(headPath, async (branch) => {
         if (!branch) return;
 
         const update = async () => {
+            if (lastBranch === branch) {
+                return;
+            }
+
+            Logger.log(`Branch updated: ${lastBranch} -> ${branch}`);
+            Logger.log(`HEAD path updated: ${lastHeadPath} -> ${headPath}`);
+
+            if (skipCommitsWithoutBranch && SHA_REGEXP.test(branch)) {
+                Logger.log(`Skipping commit without branch: ${branch}`);
+                return;
+            }
+
             // Branch change occured, save tabs then load new ones
             if (lastBranch != "") {
                 await documentManager.save(ExtensionKey + ":" + lastHeadPath + "-" + lastBranch)
