@@ -26,12 +26,12 @@ This extension was heavily based off of the work done by [Eric Amodio](https://g
 
 | Name | Description
 | ---- | -----------
-|`restoreGitBranchTabs.debug` | Enable debug mode
-|`restoreGitBranchTabs.delayUpdate` | Preserve the current tabs when switching to a new branch
+|`restoreGitBranchTabs.debug` | Enable debug mode. Equivalent to `outputLevel` of `verbose`.
+|`restoreGitBranchTabs.delayUpdate` | Delay (in milliseconds) to wait before restoring tabs after a git branch change. Useful when rebasing. Defaults to 0.
 |`restoreGitBranchTabs.gitFolderLocation` | Path to directory of .git folder
-|`restoreGitBranchTabs.newBranchPreserveTabs` | Preserve the current tabs when switching to a new branch
-|`restoreGitBranchTabs.outputLevel` | Specifies the verbosity of the output channel
-|`restoreGitBranchTabs.skipCommitsWithoutBranch` | Skip restore action on commits which are not the head of a branch. Useful when rebasing.
+|`restoreGitBranchTabs.newBranchPreserveTabs` | Preserve the current tabs when switching to a new branch. Defaults to `false`.
+|`restoreGitBranchTabs.outputLevel` | Specifies the verbosity of the output channel. Allowed: 'silent' | 'errors' | 'verbose'. Defaults to `silent`
+|`restoreGitBranchTabs.skipCommitsWithoutBranch` | Skip restore action on commits which are not the head of a branch. Useful when rebasing. Defaults to `false`.
 
 ## Known Issues
 
