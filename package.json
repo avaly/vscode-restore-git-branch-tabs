@@ -49,12 +49,12 @@
         "restoreGitBranchTabs.debug": {
           "type": "boolean",
           "default": false,
-          "description": "Specifies debug mode"
+          "description": "Specifies debug mode. Equivalent to `outputLevel` of `verbose`."
         },
         "restoreGitBranchTabs.delayUpdate": {
           "type": "number",
           "default": 0,
-          "description": "Delay to restore tabs after a git branch update. Useful to workaround git rebases."
+          "description": "Delay (in milliseconds) to wait before restoring tabs after a git branch change. Useful when rebasing."
         },
         "restoreGitBranchTabs.gitFolderLocation": {
           "type": "string",
