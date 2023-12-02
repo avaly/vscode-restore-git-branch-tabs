@@ -1,5 +1,7 @@
 'use strict';
-import { TextDocumentShowOptions, TextEditor, Uri, ViewColumn, window, workspace } from 'vscode';
+import { TextDocumentShowOptions, TextEditor, ViewColumn, window, workspace } from 'vscode';
+import { IConfig, defaultIConfig } from './configuration';
+import { ExtensionKey } from './constants';
 import { Logger } from './logger';
 
 export interface ISavedEditor {
@@ -28,9 +30,26 @@ export class SavedEditor {
             preview: false
         };
 
+        let cfg = workspace.getConfiguration().get<IConfig>(ExtensionKey);
+        if (cfg === undefined) {
+            cfg = defaultIConfig;
+        }
+        let cfgTerminalFocus = cfg.returnFocusOnTerminal
+
         Logger.log(`SavedEditor.open: Opening this <${this}>`);
 
+        const active_terminal = window.activeTerminal
+
         openEditor(this.fsPath, defaults);
+
+        /* 
+        Restoring the terminal focus since some people may be using
+        it to switch branches.
+        */
+        if (active_terminal != undefined && cfgTerminalFocus) {
+            Logger.log(`Returning focus to terminal <${active_terminal.name}>`);
+            active_terminal.show();
+        }
     }
 }
 

@@ -32,6 +32,7 @@ This extension was heavily based off of the work done by [Eric Amodio](https://g
 |`restoreGitBranchTabs.newBranchPreserveTabs` | Preserve the current tabs when switching to a new branch. Defaults to `false`.
 |`restoreGitBranchTabs.outputLevel` | Specifies the verbosity of the output channel. Allowed: 'silent' | 'errors' | 'verbose'. Defaults to `silent`
 |`restoreGitBranchTabs.skipCommitsWithoutBranch` | Skip restore action on commits which are not the head of a branch. Useful when rebasing. Defaults to `false`.
+|`restoreGitBranchTabs.returnFocusOnTerminal` | In case user interacted with the terminal on switching of the branch, focus to the terminal is returned. Default is `false`.
 
 ## Known Issues
 

@@ -2,7 +2,7 @@
   "name": "restore-git-branch-tabs-improved",
   "displayName": "Restore Git Branch Tabs Improved",
   "description": "Remembers and restores which tabs were opened for each git branch.",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "publisher": "avaly",
   "author": {
     "name": "Gerald Kotas",
@@ -80,6 +80,11 @@
           "type": "boolean",
           "default": false,
           "description": "Skip restore action on commits which are not the head of a branch. Useful when rebasing."
+        },
+        "restoreGitBranchTabs.returnFocusOnTerminal": {
+          "type": "boolean",
+          "default": "false",
+          "description": "In case user interacted with the terminal on switching of the branch, focus to the terminal is returned."
         }
       }
     },
@@ -112,10 +117,10 @@
     "@types/node": "^10.12.21",
     "@types/vscode": "^1.38.0",
     "glob": "^7.1.4",
-    "mocha": "^6.1.4",
-    "typescript": "^4.6.3",
+    "mocha": "^10.2.0",
     "tslint": "^5.12.1",
-    "vsce": "2.7.0",
+    "typescript": "^4.6.3",
+    "vsce": "^1.97.0",
     "vscode-test": "^1.0.2"
   },
   "__metadata": {

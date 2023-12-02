@@ -8,6 +8,7 @@ export interface IConfig {
     debug: boolean;
     outputLevel: OutputLevel;
     skipCommitsWithoutBranch: boolean;
+    returnFocusOnTerminal: boolean;
 }
 
 export const defaultIConfig: IConfig = {
@@ -16,5 +17,6 @@ export const defaultIConfig: IConfig = {
     delayUpdate: 0,
     debug: false,
     outputLevel: 'silent',
-    skipCommitsWithoutBranch: false
+    skipCommitsWithoutBranch: false,
+    returnFocusOnTerminal: false
 }
