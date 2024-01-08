@@ -2,7 +2,7 @@
   "name": "restore-git-branch-tabs-improved",
   "displayName": "Restore Git Branch Tabs Improved",
   "description": "Remembers and restores which tabs were opened for each git branch.",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "publisher": "avaly",
   "author": {
     "name": "Gerald Kotas",
