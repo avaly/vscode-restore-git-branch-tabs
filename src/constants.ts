@@ -3,11 +3,9 @@
 export const ExtensionKey = 'restoreGitBranchTabs';
 export const ExtensionOutputChannelName = 'Restore Git Branch Tabs';
 
-export type BuiltInCommands = 'workbench.action.closeActiveEditor' | 'workbench.action.nextEditor' | 'workbench.action.closeAllEditors';
+export type BuiltInCommands = 'workbench.action.nextEditor';
 export const BuiltInCommands = {
-    CloseActiveEditor: 'workbench.action.closeActiveEditor' as BuiltInCommands,
-    CloseAllEditors: 'workbench.action.closeAllEditors' as BuiltInCommands,
-    NextEditor: 'workbench.action.nextEditor' as BuiltInCommands,
+    CloseAllEditors: 'workbench.action.closeAllEditors' as BuiltInCommands
 };
 
 export type WorkspaceState = 'restoreGitBranchTabs:knownBranches';

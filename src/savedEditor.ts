@@ -8,7 +8,6 @@ export interface ISavedEditor {
 }
 
 export class SavedEditor {
-
     fsPath: string;
     viewColumn: ViewColumn;
 
@@ -22,25 +21,20 @@ export class SavedEditor {
     }
 
     async open() {
-        const defaults: TextDocumentShowOptions = {
-            viewColumn: this.viewColumn,
-            preserveFocus: true,
-            preview: false
-        };
-
         Logger.log(`SavedEditor.open: Opening this <${this}>`);
 
-        openEditor(this.fsPath, defaults);
-    }
-}
+        try {
+            const document = await workspace.openTextDocument(this.fsPath);
 
-async function openEditor(fsPath: string, options: TextDocumentShowOptions): Promise<TextEditor | undefined> {
-    try {
-        const document = await workspace.openTextDocument(fsPath);
-        return window.showTextDocument(document, options);
-    }
-    catch (err) {
-        Logger.error(err as Error, 'openEditor');
-        return undefined;
+            return window.showTextDocument(document, {
+                viewColumn: this.viewColumn,
+                preserveFocus: true,
+                preview: false
+            });
+        }
+        catch (err) {
+            Logger.error(err as Error, 'openEditor');
+            return undefined;
+        }
     }
 }

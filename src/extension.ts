@@ -46,7 +46,7 @@ export function activate(context: ExtensionContext) {
 
         if (!existsSync(gitPath))
         {
-            Logger.log('Git path doesnt exist. Quitting');
+            Logger.log('Git path does not exist. Quitting');
             return;
         }
 
@@ -76,8 +76,12 @@ let lastHeadPath = "";
 let delayTimer: NodeJS.Timeout | null = null;
 
 async function updateTabs(documentManager: DocumentManager, headPath: string, delay: number, skipCommitsWithoutBranch: boolean) {
+    Logger.log(`updateTabs: ${headPath}`);
+
     getGitBranch(headPath, async (branch) => {
-        if (!branch) return;
+        if (!branch) {
+            return;
+        }
 
         const update = async () => {
             if (lastBranch === branch) {
@@ -92,9 +96,9 @@ async function updateTabs(documentManager: DocumentManager, headPath: string, de
                 return;
             }
 
-            // Branch change occured, save tabs then load new ones
+            // Branch change occurred, save tabs then load new ones
             if (lastBranch != "") {
-                await documentManager.save(ExtensionKey + ":" + lastHeadPath + "-" + lastBranch)
+                await documentManager.save(ExtensionKey + ":" + lastHeadPath + "-" + lastBranch);
                 await documentManager.open(ExtensionKey + ":" + headPath + "-" + branch)
             }
 

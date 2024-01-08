@@ -1,7 +1,5 @@
 'use strict';
-import { commands, Disposable, ExtensionContext, TextEditor, window, workspace } from 'vscode';
-import { ActiveEditorTracker } from './activeEditorTracker';
-import { TextEditorComparer } from './comparers';
+import { commands, Disposable, ExtensionContext, Tab, TabInputText, TextEditor, window, workspace } from 'vscode';
 import { IConfig } from './configuration';
 import { ExtensionKey, WorkspaceState, BuiltInCommands } from './constants';
 import { Logger } from './logger';
@@ -17,6 +15,7 @@ export class DocumentManager extends Disposable {
 
     clear() {
         let knownBranches = this.context.workspaceState.get<string[]>(WorkspaceState.KnownBranches, []);
+
         Logger.log('DocumentManager.clear: Deleting the known branches', knownBranches);
 
         knownBranches.forEach((branch) => {
@@ -27,9 +26,13 @@ export class DocumentManager extends Disposable {
     }
 
     get(key: string): SavedEditor[] {
-        const data = this.context.workspaceState.get<string[]>(key);
-        Logger.log('DocumentManager.get: Got these json objects', data);
-        return (data && data.map(_ => new SavedEditor(JSON.parse(_) as ISavedEditor))) || [];
+        const data = this.context.workspaceState.get<string>(key);
+
+        Logger.log('DocumentManager.get: Got this data', data);
+
+        const editors = (data && JSON.parse(data) as ISavedEditor[]) || [];
+
+        return editors ? editors.map(item => new SavedEditor(item)) : [];
     }
 
     async open(key: string) {
@@ -61,42 +64,22 @@ export class DocumentManager extends Disposable {
 
     async save(key: string) {
         try {
-            const editorTracker = new ActiveEditorTracker();
+            const editors: ISavedEditor[] = [];
 
-            let active = window.activeTextEditor;
-            let editor = active;
-            const openEditors: TextEditor[] = [];
-            do {
-                if (editor != null) {
-                    // If we didn't start with a valid editor, set one once we find it
-                    if (active === undefined) {
-                        active = editor;
+            for (const tabGroup of window.tabGroups.all) {
+                for (const tab of tabGroup.tabs) {
+                    if (tab.input instanceof TabInputText) {
+                        editors.push({
+                            fsPath: tab.input.uri.fsPath,
+                            viewColumn: 1
+                        });
                     }
-
-                    openEditors.push(editor);
                 }
+            }
 
-                editor = await editorTracker.awaitNext(500);
+            Logger.log(`DocumentManager.save: Saving these editors ${JSON.stringify(editors)}`);
 
-                if (openEditors.some(openEditor => TextEditorComparer.equals(openEditor, editor, { useId: true, usePosition: true }))) {
-                    break;
-                }
-            } while (!TextEditorComparer.equals(active, editor, { useId: true, usePosition: true }));
-
-            editorTracker.dispose();
-
-            const editors = openEditors
-                .filter(_ => _.document !== undefined)
-                .map(_ => {
-                    return JSON.stringify({
-                        fsPath: _.document.uri.fsPath,
-                        viewColumn: _.viewColumn
-                    } as ISavedEditor);
-                });
-
-            Logger.log(`DocumentManager.save: Saving these editors JSONs ${editors}`);
-
-            this.context.workspaceState.update(key, editors);
+            this.context.workspaceState.update(key, JSON.stringify(editors));
 
             let knownBranches: string[];
             knownBranches = this.context.workspaceState.get<string[]>(WorkspaceState.KnownBranches, []);
