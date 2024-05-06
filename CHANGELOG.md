@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.0.1](https://github.com/avaly/vscode-restore-git-branch-tabs/compare/v2.0.0...v2.0.1) (2024-05-06)
+
+
+### Bug Fixes
+
+* Deprecation notice ([8a776b5](https://github.com/avaly/vscode-restore-git-branch-tabs/commit/8a776b51a1892146b5491c229dc2e148dbb53efa))
+
 ## [2.0.0](https://github.com/avaly/vscode-restore-git-branch-tabs/compare/v1.1.0...v2.0.0) (2024-01-08)
 
 
