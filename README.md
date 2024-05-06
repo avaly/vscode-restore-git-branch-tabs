@@ -1,3 +1,9 @@
+> [!CAUTION]
+>
+> This extension is deprecated! It will receive no further updates.
+>
+> Use the [native "Save/restore open editors when switching branches" feature](https://code.visualstudio.com/updates/v1_89#_saverestore-open-editors-when-switching-branches) available starting with VSCode v1.89.
+
 # Restore Git Branch Tabs Improved
 
 > ⚠️ This is a fork of the original extension [Restore Git Branch Tabs](https://marketplace.visualstudio.com/items?itemName=gkotas.restore-git-branch-tabs), which had stalled in development.
